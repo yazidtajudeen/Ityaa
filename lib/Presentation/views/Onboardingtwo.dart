@@ -23,10 +23,11 @@ class _OnboardingtwoState extends State<Onboardingtwo> {
               child: TextButton(
                 onPressed: () {
                   Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SelectLocation(),
-                      ));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SelectLocation(),
+                    ),
+                  );
                 },
                 child: const Text(
                   "Skip",
@@ -43,8 +44,46 @@ class _OnboardingtwoState extends State<Onboardingtwo> {
               width: 300,
               height: 315,
               child: Image(
-                image: AssetImage('images/onboarding.png'),
+                image: AssetImage('images/locator.png'),
                 fit: BoxFit.contain,
+              ),
+            ),
+            const SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                children: [
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        height: 1.5, // Ensures proper line spacing
+                        color: Colors.black,
+                      ),
+                      children: [
+                        const TextSpan(text: 'Locate '), // Add a space
+                        TextSpan(
+                          text: 'food ',
+                          style: TextStyle(color: AppColors.brightBlue),
+                        ),
+                        const TextSpan(text: 'vendors'), // Ensure spacing
+                        const TextSpan(text: '\nnear you!'), // Line break
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  const Text(
+                    "We'll find easy ideas for meals that taste amazing,\nget ready to discover delicious\nthings that you and everyone will love!",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      height: 1.5,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 30),
@@ -92,6 +131,26 @@ class _OnboardingtwoState extends State<Onboardingtwo> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 27,
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SelectLocation()));
+              },
+              child: RichText(
+                text: TextSpan(
+                  text: 'Enter Location Manually',
+                  style: TextStyle(
+                      color: AppColors.brightBlue,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+            )
           ],
         ),
       ),

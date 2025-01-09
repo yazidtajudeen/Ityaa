@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food/Presentation/views/Onboardingone.dart';
 import 'dart:async';
-import 'package:food/Presentation/views/Started.dart';
 import 'package:food/themes/colors.dart';
 
 class Splash extends StatefulWidget {

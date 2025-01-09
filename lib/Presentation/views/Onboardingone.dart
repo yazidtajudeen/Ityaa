@@ -43,7 +43,7 @@ class _OnboardingoneState extends State<Onboardingone>
               child: child,
             );
           },
-          transitionDuration: const Duration(milliseconds: 500),
+          transitionDuration: const Duration(milliseconds: 200),
         ),
       );
     });

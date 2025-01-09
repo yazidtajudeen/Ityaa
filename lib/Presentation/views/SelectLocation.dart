@@ -10,6 +10,13 @@ class SelectLocation extends StatefulWidget {
 class _SelectLocationState extends State<SelectLocation> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Column(
+          children: [],
+        ),
+      ),
+    );
   }
 }
