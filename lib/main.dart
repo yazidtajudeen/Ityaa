@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/Presentation/views/SelectLocation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'Presentation/views/Onboardingone.dart';
@@ -27,11 +28,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
-      initialRoute: "/splash",
+      initialRoute: "/selectlocation",
       routes: {
         "/splash": (context) => Splash(),
         "/onboardingone": (context) => Onboardingone(),
         "/onboardingtwo": (context) => Onboardingtwo(),
+        "/selectlocation": (context) => SelectLocation(),
       },
     );
   }
