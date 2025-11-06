@@ -15,89 +15,55 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final screenWidth = screenSize.width;
-    final screenHeight = screenSize.height;
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
         children: [
           // Background brown shape
-          SizedBox(
-            child: Image.asset(
-              'images/Rectangle.png',
-              fit: BoxFit.cover,
-              width: double.infinity,
-            ),
+          Image.asset(
+            'images/Rectangle.png',
+            width: double.infinity,
+            fit: BoxFit.cover,
           ),
 
-          // Place vector2 BELOW photos by drawing it earlier in the stack
+          // Vector2 behind photos
           Positioned(
-            top: screenHeight * 0.25,
+            top: height * 0.25,
             right: 0,
             child: Image.asset(
               'images/vector2.png',
-              width: screenWidth * 0.6,
+              width: width * 0.6,
               fit: BoxFit.contain,
             ),
           ),
 
-          // Overlay photos above vector2 (approximate layout per mock)
           // Top-left photo
           Positioned(
-            top: screenHeight * 0.10,
-            left: screenWidth * 0.10,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-              ),
-              child: Image.asset(
-                'images/Top left image.png',
-                width: screenWidth * 0.38,
-                height: screenHeight * 0.21,
-                fit: BoxFit.cover,
-              ),
-            ),
+            top: height * 0.10,
+            left: width * 0.10,
+            child: _buildPhoto('images/Top left image.png', width, height),
           ),
 
           // Top-right photo
           Positioned(
-            top: screenHeight * 0.22,
-            right: screenWidth * 0.08,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
-              ),
-              child: Image.asset(
-                'images/Top right image.png',
-                width: screenWidth * 0.38,
-                height: screenHeight * 0.21,
-                fit: BoxFit.cover,
-              ),
-            ),
+            top: height * 0.22,
+            right: width * 0.08,
+            child: _buildPhoto('images/Top right image.png', width, height),
           ),
 
           // Bottom-left photo
           Positioned(
-            top: screenHeight * 0.34,
-            left: screenWidth * 0.09,
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
-              ),
-              child: Image.asset(
-                'images/Bottom image.png',
-                width: screenWidth * 0.38,
-                height: screenHeight * 0.21,
-                fit: BoxFit.cover,
-              ),
-            ),
+            top: height * 0.34,
+            left: width * 0.09,
+            child: _buildPhoto('images/Bottom image.png', width, height),
           ),
 
-          // Bottom white panel with text and next button (raised slightly)
+          // Bottom panel with text and Next button
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -118,15 +84,15 @@ class _OnboardingState extends State<OnboardingScreen> {
                               const TextSpan(text: 'More '),
                               TextSpan(
                                 text: 'Taste',
-                                style: TextStyle(
-                                  color: const Color(0xFFDBAC57),
+                                style: const TextStyle(
+                                  color: Color(0xFFDBAC57),
                                 ),
                               ),
                               const TextSpan(text: ', More '),
                               TextSpan(
                                 text: 'Satisfaction',
-                                style: TextStyle(
-                                  color: const Color(0xFFDBAC57),
+                                style: const TextStyle(
+                                  color: Color(0xFFDBAC57),
                                 ),
                               ),
                             ],
@@ -138,7 +104,7 @@ class _OnboardingState extends State<OnboardingScreen> {
                                 height: 1.2,
                               ),
                           maxLines: 1,
-                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 8),
                         const Text(
@@ -148,12 +114,13 @@ class _OnboardingState extends State<OnboardingScreen> {
                             color: Colors.black87,
                             height: 1.5,
                           ),
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.left,
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
+
+                  // Next button
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -179,6 +146,23 @@ class _OnboardingState extends State<OnboardingScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPhoto(String path, double width, double height) {
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(20),
+        topRight: Radius.circular(20),
+        bottomLeft: Radius.circular(20),
+        bottomRight: Radius.circular(20),
+      ),
+      child: Image.asset(
+        path,
+        width: width * 0.38,
+        height: height * 0.21,
+        fit: BoxFit.cover,
       ),
     );
   }

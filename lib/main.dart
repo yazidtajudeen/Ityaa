@@ -1,21 +1,25 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
 import 'router/app_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'shared/theme/colors.dart';
+import 'core/DI/injection.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  setupDependencies();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     final baseTextTheme = Theme.of(context).textTheme;
+
     final poppinsText = GoogleFonts.poppinsTextTheme(baseTextTheme);
-    // Use Abhaya Libre for display/heading styles, keep Poppins as body
+
     final mergedTextTheme = poppinsText.copyWith(
       displayLarge: GoogleFonts.abhayaLibre(
         textStyle: poppinsText.displayLarge,
@@ -42,20 +46,19 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter().config(),
       theme: ThemeData(
+        useMaterial3: true,
         textTheme: mergedTextTheme,
-        colorScheme: ColorScheme(
-          brightness: Brightness.light,
+        scaffoldBackgroundColor: AppColors.gray100,
+        colorScheme: const ColorScheme.light(
           primary: AppColors.brown,
           onPrimary: Colors.white,
           secondary: AppColors.amber,
           onSecondary: Colors.black,
-          error: const Color(0xFFB00020),
+          error: Color(0xFFB00020),
           onError: Colors.white,
           surface: AppColors.sand50,
           onSurface: Colors.black,
         ),
-        scaffoldBackgroundColor: AppColors.gray100,
-        useMaterial3: true,
       ),
     );
   }
